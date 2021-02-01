@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang=ru>
+  <head>
+    <meta charset="utf-8">
+    <titleРейтинг</title>
+
+      <script type="text/javascript">
+        var rez=0;
+        var m_grades = [];
+        var m_credits = [];
+
+        function enterButtonClick()
+        {
+          var str1 = document.getElementById("textsub").value;
+
+          var str2 = document.getElementById("textcred").value;
+          m_credits.push(parseFloat(str2));
+
+          var str3 = document.getElementById("textgrad").value;
+          m_grades.push(1*str3);
+
+          document.getElementById("divgrades").innerHTML+="<br>Предмет: " +str1+" Кредит: " + str2+" Оценка: "+str3;
+          console.log(m_credits);
+        }//enterButtonClick
+
+        function okButtonClick()
+        {
+          var sumcred=0;
+          for (var i = 0; i < m_credits.length; i++) {
+            sumcred+=m_credits[i];
+          }
+          for (var i = 0; i < m_grades.length; i++) {
+            rez=rez+(m_grades[i]*m_credits[i]);
+          }
+          rez=rez/sumcred*0.9;
+          document.getElementById("divrez").innerHTML=rez;
+        }//okButtonClick
+      </script>
+  </head>
+
+  <body>
+    <div id="divform" style="border-style:double; margin:10pt; padding:10pt;">
+      <form action="index.html" method="post">
+        <b> Введите название: </b>
+        <input type="text" id="textsub" value="">
+        <b> Введите кредит: </b>
+        <input type="number" id="textcred" value="">
+        <b> Введите оценку: </b>
+        <input type="number" id="textgrad" value="">
+        <br> <br>
+        <input type="button" id="enterbutton" value=" Добавить " onclick="enterButtonClick()">
+      </form>
+    </div>
+    <div id="divgrades" style="border-style:double; margin:10pt; padding:10pt; width:300px">
+      <b>Оценки:</b>
+    </div>
+  <input type="button" id="okbutton" value=" Результат " style="margin-left: 10pt" onclick="okButtonClick()">
+  <div id="divrez" style="border-style:double; margin:10pt; padding:10pt; width:200px"></div>
+  <footer>v1.0</footer>
+  </body>
+</html>
