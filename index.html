@@ -3,11 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>Рейтинг</title>
-    <style>
 
+    <style>
+    input[type=text] {
+      width: 100px;
+    }
+    input[type=number] {
+      width: 75px;
+    }
+
+    #addbutton {
+      margin-left: 2px;
+    }
+    #okbutton {
+      margin: 5px;
+    }
     </style>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script type="text/javascript">
+
+    <script type="text/javascript">
         let m_grades = [];
         let m_credits = [];
 
@@ -16,57 +31,59 @@
           $('#gradestable').find('tbody')
                           .append('<tr>')
                           .append('<td><input type="text" autocomplete="off" class="textsub" value=""></td>')
-                          .append('<td><input type="number" autocomplete="off" class="textcred" value=""></td>')
-                          .append('<td><input type="number" autocomplete="off" class="textgrad" value=""></td>')
+                          .append('<td><input type="number" autocomplete="off" min="0" max="30" step="0.5" class="textcred" value="0"></td>')
+                          .append('<td><input type="number" autocomplete="off" min="60" max="100" class="textgrad" value="60"></td>')
                           .append('</tr>');
         }
 
         function okButtonClick()
         {
-          let rez=0;
+          let res=0;
           for (var i = 0; i < $('.textcred').length; i++) {
             m_credits.push($('.textcred')[i].value*1);
           }
-          console.log(m_credits);
+          //console.log(m_credits);
           for (var i = 0; i < $('.textgrad').length; i++) {
             m_grades.push($('.textgrad')[i].value*1);
           }
-          console.log(m_grades);
+          //console.log(m_grades);
 
           let sumcred=0;
           for (var i = 0; i < m_credits.length; i++) {
             sumcred+=m_credits[i];
           }
           for (var i = 0; i < m_grades.length; i++) {
-            rez=rez+(m_grades[i]*m_credits[i]);
-          }          
-          rez=rez/sumcred*0.9;
-          rez=rez.toFixed(2)*1;
-          alert(rez);
+            res=res+(m_grades[i]*m_credits[i]);
+          }
+
+          res=res/sumcred*0.9;
+          res=res.toFixed(2)*1;
+          alert(res);
+
           m_grades.length=0;
           m_credits.length=0;
-          rez=0;
+          res=0;
         }
-      </script>
+    </script>
   </head>
 
   <body>
-<table id="gradestable">
-  <tr>
-    <th>Предмет</th>
-    <th>Кредит</th>
-    <th>Оценка</th>
-  </tr>
-  <tr>
-    <td><input type="text" autocomplete="off" class="textsub" value=""></td>
-    <td><input type="number" autocomplete="off" class="textcred" value=""></td>
-    <td><input type="number" autocomplete="off" class="textgrad" value=""></td>
-  </tr>
-</table>
+    <table id="gradestable">
+      <tr>
+        <th>Предмет</th>
+        <th>Кредит</th>
+        <th>Оценка</th>
+      </tr>
+      <tr>
+        <td><input type="text" autocomplete="off" class="textsub" value=""></td>
+        <td><input type="number" autocomplete="off" min="0" max="30" step="0.5" class="textcred" value="0"></td>
+        <td><input type="number" autocomplete="off" min="60" max="100" class="textgrad" value="60"></td>
+      </tr>
+    </table>
 
-  <input type="button" id="addbutton" value=" Добавить " onclick="addButtonClick()">
-  <br><br>
-  <input type="button" id="okbutton" value=" Результат " onclick="okButtonClick()">
-  <footer>v1.1</footer>
+    <input type="button" id="addbutton" value=" Добавить " onclick="addButtonClick()">
+    <br><br>
+    <input type="button" id="okbutton" value=" Результат " onclick="okButtonClick()">
+    <footer>v1.1</footer>
   </body>
 </html>
